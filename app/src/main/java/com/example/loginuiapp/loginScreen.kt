@@ -127,7 +127,8 @@ private fun TextFieldSection() {
             shape = RoundedCornerShape(10.dp),
             modifier = Modifier
                 .fillMaxWidth()
-                .height(64.dp).padding(top = 8.dp),
+                .height(64.dp)
+                .padding(top = 8.dp),
             value = email,
             onValueChange = { value -> email = value },
             placeholder = {
@@ -154,7 +155,8 @@ private fun TextFieldSection() {
             shape = RoundedCornerShape(10.dp),
             modifier = Modifier
                 .fillMaxWidth()
-                .height(64.dp).padding(top = 8.dp),
+                .height(64.dp)
+                .padding(top = 8.dp),
             value = password, onValueChange = { value -> password = value },
             placeholder = {
                 Text(
@@ -190,6 +192,7 @@ private fun TextFieldSection() {
             colors = ButtonDefaults.buttonColors(
                 containerColor = Color(0xff1F41BB)
             ),
+            elevation = ButtonDefaults.buttonElevation(4.dp),
             onClick = {}) {
             Text(
                 "Sing in",
