@@ -24,6 +24,7 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
@@ -39,12 +40,13 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.example.loginuiapp.ui.theme.poppinsBold
 import com.example.loginuiapp.ui.theme.poppinsMedium
 import com.example.loginuiapp.ui.theme.poppinsSemiBold
 
 @Composable
-fun LoginScreenContent() {
+fun LoginScreenContent(navController: NavController) {
     Scaffold { contentPadding ->
         Box {
             BackLayerDesign()
@@ -87,7 +89,7 @@ fun LoginScreenContent() {
                 }
                 Spacer(modifier = Modifier.height(76.dp))
 
-                TextFieldSection()
+                TextFieldSection(navController)
 
                 Spacer(modifier = Modifier.height(65.dp))
 
@@ -98,7 +100,7 @@ fun LoginScreenContent() {
 }
 
 @Composable
-private fun TextFieldSection() {
+private fun TextFieldSection(navController: NavController) {
     var email by remember {
         mutableStateOf("")
     }
@@ -195,7 +197,7 @@ private fun TextFieldSection() {
             elevation = ButtonDefaults.buttonElevation(4.dp),
             onClick = {}) {
             Text(
-                "Sing in",
+                "Sign in",
                 style = TextStyle(
                     fontSize = 20.sp,
                     fontFamily = poppinsSemiBold,
@@ -205,16 +207,23 @@ private fun TextFieldSection() {
             )
         }
 
-        Spacer(modifier = Modifier.height(30.dp))
+        Spacer(modifier = Modifier.height(25.dp))
 
-        Text(
-            "Create an account", style = TextStyle(
-                fontSize = 14.sp,
-                fontFamily = poppinsSemiBold,
-                color = Color(0xff494949),
-                textAlign = TextAlign.Center,
+
+        TextButton(onClick = {
+            navController.navigate("RegisterScreen"){
+                popUpTo("LoginScreen"){inclusive = true}
+            }
+        }) {
+            Text(
+                "Create an account", style = TextStyle(
+                    fontSize = 14.sp,
+                    fontFamily = poppinsSemiBold,
+                    color = Color(0xff494949),
+                    textAlign = TextAlign.Center,
+                )
             )
-        )
+        }
     }
 }
 

@@ -24,6 +24,7 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
@@ -39,12 +40,13 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.example.loginuiapp.ui.theme.poppinsBold
 import com.example.loginuiapp.ui.theme.poppinsMedium
 import com.example.loginuiapp.ui.theme.poppinsSemiBold
 
 @Composable
-fun RegisterScreenContent() {
+fun RegisterScreenContent(navController: NavController) {
     Scaffold { contentPadding ->
         Box {
             BackLayerDesign()
@@ -88,7 +90,7 @@ fun RegisterScreenContent() {
                 }
                 Spacer(modifier = Modifier.height(50.dp))
 
-                TextFieldSection()
+                TextFieldSection(navController)
 
                 Spacer(modifier = Modifier.height(65.dp))
 
@@ -99,7 +101,7 @@ fun RegisterScreenContent() {
 }
 
 @Composable
-private fun TextFieldSection() {
+private fun TextFieldSection(navController: NavController) {
     var email by remember {
         mutableStateOf("")
     }
@@ -230,16 +232,22 @@ private fun TextFieldSection() {
             )
         }
 
-        Spacer(modifier = Modifier.height(30.dp))
+        Spacer(modifier = Modifier.height(25.dp))
 
-        Text(
-            "Create an account", style = TextStyle(
-                fontSize = 14.sp,
-                fontFamily = poppinsSemiBold,
-                color = Color(0xff494949),
-                textAlign = TextAlign.Center,
+        TextButton(onClick = {
+            navController.navigate("LoginScreen"){
+                popUpTo("RegisterScreen"){inclusive = true}
+            }
+        }) {
+            Text(
+                "Already have an account", style = TextStyle(
+                    fontSize = 14.sp,
+                    fontFamily = poppinsSemiBold,
+                    color = Color(0xff494949),
+                    textAlign = TextAlign.Center,
+                )
             )
-        )
+        }
     }
 }
 

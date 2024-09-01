@@ -41,13 +41,14 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.example.loginuiapp.ui.theme.poppinsBold
 import com.example.loginuiapp.ui.theme.poppinsRegular
 import com.example.loginuiapp.ui.theme.poppinsSemiBold
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun WelcomeScreenContent() {
+fun WelcomeScreenContent(navController: NavController) {
     Scaffold { contentPadding ->
         Box {
             BackLayerDesign()
@@ -66,7 +67,7 @@ fun WelcomeScreenContent() {
                 Spacer(modifier = Modifier.height(50.dp))
                 TitleSection()
                 Spacer(modifier = Modifier.height(88.dp))
-                ButtonSection()
+                ButtonSection(navController)
             }
         }
     }
@@ -101,7 +102,7 @@ private fun TitleSection() {
 }
 
 @Composable
-private fun ButtonSection() {
+private fun ButtonSection(navController: NavController) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -118,7 +119,9 @@ private fun ButtonSection() {
                 contentColor = Color.White,
                 containerColor = Color(0xff1F41BB)
             ),
-            onClick = {}) {
+            onClick = {
+                navController.navigate("LoginScreen")
+            }) {
             Text(
                 "Login", style = TextStyle(
                     fontFamily = poppinsSemiBold,
@@ -133,7 +136,9 @@ private fun ButtonSection() {
             modifier = Modifier
                 .height(50.dp)
                 .width(140.dp),
-            onClick = {}) {
+            onClick = {
+                navController.navigate("RegisterScreen")
+            }) {
             Text(
                 "Register", style = TextStyle(
                     fontFamily = poppinsSemiBold,
